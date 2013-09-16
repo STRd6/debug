@@ -17,12 +17,23 @@
       "mode": "100644",
       "content": "Debug\n=====\n\nSome helpful utilities for advanced debugging.\n\nImplementation\n--------------\n\n    Debug =\n\nBy default, breakOn will only break when JS attempts to change the value of a \nproperty. The third optional argument takes 'read' if you'd also like to break \nwhen values are read.\n    \n      breakOn: (obj, prop, mode) ->\n    \n        value = obj[prop]\n    \n        Object.defineProperty obj, prop,\n          get: ->\n            if mode is \"read\"\n              debugger\n\n            value\n\n          set: (newValue) ->\n            debugger\n            value = newValue\n\n\n    module.exports = Debug\n",
       "type": "blob"
+    },
+    "test/debug.coffee.md": {
+      "path": "test/debug.coffee.md",
+      "mode": "100644",
+      "content": "    Debug = require('/main')\n\n    describe \"Debug\", ->\n      describe \"breakOn\", ->\n        it \"objects should continue to work normally outside of console\", ->\n          duder = \n            rad: true\n            \n          Debug.breakOn(duder, 'rad', \"read\")\n          \n          assert.equal duder.rad, true\n          \n          duder.rad = \"yolo\"\n          \n          assert.equal duder.rad, \"yolo\"\n",
+      "type": "blob"
     }
   },
   "distribution": {
     "main": {
       "path": "main",
       "content": "(function() {\n  var Debug;\n\n  Debug = {\n    breakOn: function(obj, prop, mode) {\n      var value;\n      value = obj[prop];\n      return Object.defineProperty(obj, prop, {\n        get: function() {\n          if (mode === \"read\") {\n            debugger;\n          }\n          return value;\n        },\n        set: function(newValue) {\n          debugger;\n          return value = newValue;\n        }\n      });\n    }\n  };\n\n  module.exports = Debug;\n\n}).call(this);\n",
+      "type": "blob"
+    },
+    "test/debug": {
+      "path": "test/debug",
+      "content": "(function() {\n  var Debug;\n\n  Debug = require('/main');\n\n  describe(\"Debug\", function() {\n    return describe(\"breakOn\", function() {\n      return it(\"objects should continue to work normally outside of console\", function() {\n        var duder;\n        duder = {\n          rad: true\n        };\n        Debug.breakOn(duder, 'rad', \"read\");\n        assert.equal(duder.rad, true);\n        duder.rad = \"yolo\";\n        return assert.equal(duder.rad, \"yolo\");\n      });\n    });\n  });\n\n}).call(this);\n",
       "type": "blob"
     }
   },
