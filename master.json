@@ -1,0 +1,38 @@
+{
+  "source": {
+    "LICENSE": {
+      "path": "LICENSE",
+      "mode": "100644",
+      "content": "The MIT License (MIT)\n\nCopyright (c) 2013 Daniel X Moore\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of\nthis software and associated documentation files (the \"Software\"), to deal in\nthe Software without restriction, including without limitation the rights to\nuse, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of\nthe Software, and to permit persons to whom the Software is furnished to do so,\nsubject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS\nFOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR\nCOPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN\nCONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "type": "blob"
+    },
+    "README.md": {
+      "path": "README.md",
+      "mode": "100644",
+      "content": "debug\n=====\n\nHelpful debugging utilities\n",
+      "type": "blob"
+    },
+    "main.coffee.md": {
+      "path": "main.coffee.md",
+      "mode": "100644",
+      "content": "Debug\n=====\n\nSome helpful utilities for advanced debugging.\n\nImplementation\n--------------\n\n    Debug =\n\nBy default, breakOn will only break when JS attempts to change the value of a \nproperty. The third optional argument takes 'read' if you'd also like to break \nwhen values are read.\n    \n      breakOn: (obj, prop, mode) ->\n    \n        value = obj[prop]\n    \n        Object.defineProperty obj, prop,\n          get: ->\n            if mode is \"read\"\n              debugger\n\n            value\n\n          set: (newValue) ->\n            debugger\n            value = newValue\n\n\n    module.exports = Debug\n",
+      "type": "blob"
+    }
+  },
+  "distribution": {
+    "main": {
+      "path": "main",
+      "content": "(function() {\n  var Debug;\n\n  Debug = {\n    breakOn: function(obj, prop, mode) {\n      var value;\n      value = obj[prop];\n      return Object.defineProperty(obj, prop, {\n        get: function() {\n          if (mode === \"read\") {\n            debugger;\n          }\n          return value;\n        },\n        set: function(newValue) {\n          debugger;\n          return value = newValue;\n        }\n      });\n    }\n  };\n\n  module.exports = Debug;\n\n}).call(this);\n",
+      "type": "blob"
+    }
+  },
+  "entryPoint": "main",
+  "dependencies": {},
+  "repository": {
+    "full_name": "STRd6/debug",
+    "branch": "master"
+  },
+  "progenitor": {
+    "url": "http://strd6.github.io/editor/"
+  }
+}
