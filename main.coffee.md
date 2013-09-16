@@ -14,7 +14,7 @@ when values are read.
     
       breakOn: (obj, prop, mode) ->
     
-        var value = obj[prop]
+        value = obj[prop]
     
         Object.defineProperty obj, prop,
           get: ->
